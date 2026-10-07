@@ -103,7 +103,7 @@ export const Shop = () => {
                   key={filter}
                   type="button"
                   onClick={() => update('category', filter)}
-                  className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-all duration-300 ${
+                  className={`rounded-full border px-4 py-2 text-[13px] font-medium transition-[border-color,background-color,color] duration-300 ease-out-quart ${
                     active === filter
                       ? 'border-gold bg-gold text-ink'
                       : 'border-line bg-white/[0.02] text-muted hover:border-bone/30 hover:text-bone'

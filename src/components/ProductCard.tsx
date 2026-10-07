@@ -3,17 +3,24 @@ import { formatNaira, type Product } from '../data/products'
 import { useCart } from '../context/CartContext'
 import { VialVisual } from './VialVisual'
 
-export const ProductCard = ({ product }: { product: Product }) => {
+type ProductCardProps = {
+  product: Product
+  className?: string
+}
+
+export const ProductCard = ({ product, className = '' }: ProductCardProps) => {
   const { addItem } = useCart()
   const discount = product.compareAt
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
     : 0
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-surface transition-all duration-500 hover:border-gold/40 hover:shadow-[0_34px_90px_-50px_rgba(0,0,0,0.95)]">
+    <article
+      className={`hover-lift group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface hover:border-gold/40 hover:shadow-[0_34px_90px_-50px_rgba(0,0,0,0.95)] ${className}`}
+    >
       <div className="relative overflow-hidden">
         <div
-          className="relative flex h-64 items-center justify-center transition-transform duration-700 ease-out group-hover:scale-105"
+          className="relative flex h-64 items-center justify-center transition-transform duration-700 ease-out-quart group-hover:scale-105"
           style={{
             background:
               'radial-gradient(90% 70% at 50% 100%, rgba(255,255,255,0.05) 0%, transparent 70%)',
@@ -21,6 +28,11 @@ export const ProductCard = ({ product }: { product: Product }) => {
         >
           <VialVisual name={product.name} purity={product.purity} accent={product.accent} />
         </div>
+
+        <span
+          aria-hidden
+          className="group-sheen pointer-events-none absolute inset-y-0 left-0 z-10 w-1/3 -translate-x-[130%] skew-x-[-12deg] bg-white/10 blur-md"
+        />
 
         <div className="absolute left-4 top-4 flex flex-col gap-2">
           {product.badge && (
@@ -38,7 +50,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
           {product.category}
         </span>
 
-        <div className="pointer-events-none absolute inset-0 hidden translate-y-6 flex-col justify-end bg-gradient-to-t from-ink via-ink/95 to-ink/75 p-6 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 md:flex">
+        <div className="pointer-events-none absolute inset-0 hidden translate-y-6 flex-col justify-end bg-gradient-to-t from-ink via-ink/95 to-ink/75 p-6 opacity-0 transition-[transform,opacity] duration-500 ease-out-quart group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 md:flex">
           <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-gold">
             Product details
           </p>

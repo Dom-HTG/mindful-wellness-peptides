@@ -92,7 +92,7 @@ export const Testimonials = () => {
               return (
                 <div
                   key={item.name}
-                  className="absolute inset-0 overflow-hidden rounded-3xl border border-line transition-all duration-700 ease-out"
+                  className="absolute inset-0 overflow-hidden rounded-3xl border border-line transition-[transform,opacity] duration-[600ms] ease-out-quart"
                   style={{
                     transform: `translateY(${offset * 18}px) scale(${1 - offset * 0.05})`,
                     opacity: offset > 2 ? 0 : 1 - offset * 0.18,
@@ -116,9 +116,12 @@ export const Testimonials = () => {
             </div>
           </div>
 
-          <div>
+          <div aria-live="polite">
             <Quote className="h-9 w-9 text-gold" />
-            <blockquote className="mt-6 font-display text-2xl font-medium leading-snug tracking-[-0.02em] text-bone sm:text-3xl md:text-4xl">
+            <blockquote
+              key={index}
+              className="mt-6 animate-fade-up font-display text-2xl font-medium leading-snug tracking-[-0.02em] text-bone [animation-duration:0.5s] sm:text-3xl md:text-4xl"
+            >
               {active.quote}
             </blockquote>
             <div className="mt-8 flex gap-2">
@@ -127,7 +130,7 @@ export const Testimonials = () => {
                   key={item.name}
                   type="button"
                   onClick={() => setIndex(position)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                  className={`h-1.5 rounded-full transition-[width,background-color] duration-500 ease-out-quart ${
                     position === index ? 'w-10 bg-gold' : 'w-4 bg-white/15'
                   }`}
                   aria-label={`Show review from ${item.name}`}

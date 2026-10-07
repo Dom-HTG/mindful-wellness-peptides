@@ -119,7 +119,7 @@ export const Quality = () => (
     <section className="border-b border-line bg-ink px-6 py-20 md:py-28">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {METRICS.map((metric, index) => (
-          <Reveal key={metric.label} delay={index * 0.08}>
+          <Reveal key={metric.label} delay={index * 0.08} variant="scale">
             <article className="flex h-full flex-col rounded-3xl border border-line bg-surface p-7">
               <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/[0.03] text-gold">
                 <metric.icon className="h-5 w-5" />
@@ -135,11 +135,12 @@ export const Quality = () => (
       </div>
     </section>
 
-    <section className="border-b border-line bg-surface/40 px-6 py-32 md:py-48">
-      <div className="mx-auto max-w-7xl">
-        <Reveal className="max-w-3xl">
+    <section className="relative overflow-hidden border-b border-line bg-surface/40 px-6 py-32 md:py-48">
+      <div className="blueprint pointer-events-none absolute inset-0 opacity-30" />
+      <div className="relative mx-auto max-w-7xl">
+        <Reveal className="max-w-3xl" variant="left">
           <p className="eyebrow">Three methods, one verdict</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
+          <h2 className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
             No lot is released on a single reading.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">
@@ -190,7 +191,7 @@ export const Quality = () => (
 
         <Reveal>
           <p className="eyebrow">Why raw materials matter</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
+          <h2 className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
             Exceptional peptides begin with exceptional inputs.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted">
@@ -262,7 +263,7 @@ export const Quality = () => (
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <p className="eyebrow">Documentation</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
+          <h2 className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
             The certificate travels with the vial.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted">
@@ -317,11 +318,12 @@ export const Quality = () => (
       </div>
     </section>
 
-    <section className="bg-ink px-6 py-32 md:py-48">
-      <div className="mx-auto max-w-7xl">
-        <Reveal className="max-w-3xl">
+    <section className="relative overflow-hidden bg-ink px-6 py-32 md:py-48">
+      <div className="blueprint pointer-events-none absolute inset-0 opacity-30" />
+      <div className="relative mx-auto max-w-7xl">
+        <Reveal className="max-w-3xl" variant="right">
           <p className="eyebrow">Storage &amp; handling</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
+          <h2 className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
             Protect the chain, protect the result.
           </h2>
         </Reveal>

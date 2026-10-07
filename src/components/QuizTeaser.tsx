@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Check, Compass } from 'lucide-react'
 import { Reveal } from './Reveal'
+import { MaskHeading } from './MaskHeading'
 
 const PREVIEW = [
   { label: 'Metabolic & weight research', selected: true },
@@ -21,9 +22,9 @@ export const QuizTeaser = () => (
     <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-20">
       <Reveal>
         <p className="eyebrow">Peptide finder</p>
-        <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
+        <MaskHeading className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
           Not sure which peptide to start with?
-        </h2>
+        </MaskHeading>
         <p className="mt-6 max-w-lg text-base leading-relaxed text-muted">
           Tell us what you want to research and we will turn it into a clear starting profile with
           recommended compounds, matched to your priorities.
@@ -44,7 +45,11 @@ export const QuizTeaser = () => (
 
       <Reveal delay={0.1}>
         <div className="group relative">
-          <div className="rounded-3xl border border-line bg-ink p-6 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.95)] transition-colors duration-500 group-hover:border-gold/40 md:p-8">
+          <div className="relative overflow-hidden rounded-3xl border border-line bg-ink p-6 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.95)] transition-colors duration-500 group-hover:border-gold/40 md:p-8">
+            <span
+              aria-hidden
+              className="group-sheen pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-[130%] skew-x-[-12deg] bg-white/[0.06] blur-md"
+            />
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-gold">
                 <Compass className="h-3.5 w-3.5" />

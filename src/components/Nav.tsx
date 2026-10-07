@@ -34,7 +34,7 @@ export const Nav = () => {
   return (
     <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-3">
       <nav
-        className={`w-full max-w-[1180px] rounded-[30px] border px-3 py-2.5 transition-all duration-500 sm:px-4 ${
+        className={`w-full max-w-[1180px] rounded-[30px] border px-3 py-2.5 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out-quart sm:px-4 ${
           menuOpen
             ? 'border-line bg-ink shadow-[0_28px_70px_-30px_rgba(0,0,0,0.95)] backdrop-blur-xl'
             : scrolled
@@ -93,7 +93,7 @@ export const Nav = () => {
         </div>
 
         <div
-          className={`grid overflow-hidden transition-all duration-500 ease-out lg:hidden ${
+          className={`grid overflow-hidden transition-[grid-template-rows,opacity,margin] duration-500 ease-out-quart lg:hidden ${
             menuOpen ? 'mt-3 grid-rows-[1fr] opacity-100' : 'mt-0 grid-rows-[0fr] opacity-0'
           }`}
         >

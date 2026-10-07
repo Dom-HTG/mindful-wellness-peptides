@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { EASE, prefersReducedMotion } from '../lib/motion'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -46,46 +47,48 @@ export const DesireScroll = () => {
 
   useGSAP(
     () => {
+      if (prefersReducedMotion()) return
+
       gsap.utils.toArray<HTMLElement>('.chapter-media').forEach((media) => {
+        gsap.from(media, {
+          clipPath: 'inset(16% 10% 16% 10% round 28px)',
+          scale: 1.045,
+          duration: 1.1,
+          ease: EASE.expo,
+          scrollTrigger: { trigger: media, start: 'top 88%' },
+        })
+        const image = media.querySelector('.chapter-img')
         gsap.fromTo(
-          media,
-          { scale: 0.82, opacity: 0.35 },
+          image,
+          { yPercent: -7 },
           {
-            scale: 1,
-            opacity: 1,
+            yPercent: 7,
             ease: 'none',
-            scrollTrigger: {
-              trigger: media,
-              start: 'top 88%',
-              end: 'top 45%',
-              scrub: true,
-            },
+            scrollTrigger: { trigger: media, start: 'top bottom', end: 'bottom top', scrub: true },
           },
         )
-        gsap.to(media, {
-          opacity: 0.2,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: media,
-            start: 'bottom 42%',
-            end: 'bottom 6%',
-            scrub: true,
-          },
+      })
+
+      gsap.utils.toArray<HTMLElement>('.chapter-copy').forEach((copy) => {
+        gsap.from(copy.children, {
+          y: 24,
+          autoAlpha: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: EASE.out,
+          scrollTrigger: { trigger: copy, start: 'top 86%' },
         })
       })
 
-      const mm = gsap.matchMedia()
-      mm.add('(min-width: 768px)', () => {
+      gsap.utils.toArray<HTMLElement>('.chapter').forEach((chapter, index) => {
+        const node = root.current?.querySelector(`[data-rail="${index}"]`)
         ScrollTrigger.create({
-          trigger: root.current,
-          start: 'top 20%',
-          end: 'bottom 80%',
-          pin: '.desire-pin',
-          pinSpacing: false,
+          trigger: chapter,
+          start: 'top 55%',
+          end: 'bottom 55%',
+          onToggle: (self) => node?.classList.toggle('is-active', self.isActive),
         })
       })
-
-      return () => mm.revert()
     },
     { scope: root },
   )
@@ -97,8 +100,8 @@ export const DesireScroll = () => {
       className="relative border-y border-line bg-surface/40 px-6 py-32 md:py-48"
     >
       <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
-        <div>
-          <div className="desire-pin max-w-md">
+        <div className="md:self-start">
+          <div className="md:sticky md:top-28">
             <p className="eyebrow">How we hold the standard</p>
             <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
               From raw reagent to your bench, nothing is guessed.
@@ -107,9 +110,27 @@ export const DesireScroll = () => {
               We built Mindful Wellness Nigeria around a simple promise: the compound you receive is
               the compound your certificate describes.
             </p>
+
+            <ol className="mt-10 hidden space-y-1 md:block">
+              {CHAPTERS.map((chapter, index) => (
+                <li key={chapter.title}>
+                  <div
+                    data-rail={index}
+                    className="rail-node flex items-center gap-4 rounded-2xl border border-transparent px-3 py-3"
+                  >
+                    <span className="relative flex h-2.5 w-2.5 flex-shrink-0 items-center justify-center">
+                      <span className="rail-halo absolute inset-0 rounded-full blur-[2px]" />
+                      <span className="rail-dot absolute inset-0 rounded-full" />
+                    </span>
+                    <span className="rail-label text-sm font-medium">{chapter.title}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
             <Link
               to="/standards"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-gold transition-colors hover:text-gold-soft"
+              className="link-underline hover-underline mt-8 inline-flex items-center gap-2 text-sm font-semibold text-gold transition-colors hover:text-gold-soft"
             >
               See the full standards
               <ArrowUpRight className="h-4 w-4" />
@@ -120,15 +141,16 @@ export const DesireScroll = () => {
         <div className="space-y-24 md:space-y-40">
           {CHAPTERS.map((chapter) => (
             <article key={chapter.title} className="chapter">
-              <div className="overflow-hidden rounded-3xl border border-line">
+              <div className="chapter-media relative h-72 overflow-hidden rounded-3xl border border-line md:h-96">
                 <div
-                  className="chapter-media h-72 w-full bg-cover bg-center contrast-125 md:h-96"
+                  className="chapter-img absolute inset-0 scale-110 bg-cover bg-center contrast-125"
                   style={{
                     backgroundImage: `url('https://picsum.photos/seed/${chapter.seed}/1200/800')`,
                   }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
               </div>
-              <div className="mt-7">
+              <div className="chapter-copy mt-7">
                 <h3 className="font-display text-2xl font-semibold leading-tight text-bone md:text-3xl">
                   {chapter.title}
                 </h3>

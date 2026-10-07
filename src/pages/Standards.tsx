@@ -95,7 +95,7 @@ export const Standards = () => (
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <Reveal>
           <p className="eyebrow">One promise, held end to end</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
+          <h2 className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl">
             The compound you receive is the compound your certificate describes.
           </h2>
         </Reveal>
@@ -283,11 +283,12 @@ export const Standards = () => (
       </div>
     </section>
 
-    <section className="bg-ink px-6 py-32 md:py-48">
-      <div className="mx-auto max-w-7xl">
-        <Reveal className="max-w-3xl">
+    <section className="relative overflow-hidden bg-ink px-6 py-32 md:py-48">
+      <div className="blueprint pointer-events-none absolute inset-0 opacity-30" />
+      <div className="relative mx-auto max-w-7xl">
+        <Reveal className="max-w-3xl" variant="left">
           <p className="eyebrow">Compliance &amp; handling</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
+          <h2 className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
             The rules we hold ourselves to.
           </h2>
         </Reveal>

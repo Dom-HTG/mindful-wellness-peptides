@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Nav } from './Nav'
 import { Footer } from './Footer'
 import { CartDrawer } from './CartDrawer'
+import { ScrollProgress } from './ScrollProgress'
 
 const ScrollManager = () => {
   const { pathname, hash } = useLocation()
@@ -24,6 +25,7 @@ const ScrollManager = () => {
 export const Layout = () => (
   <div className="noise relative min-h-screen bg-ink">
     <ScrollManager />
+    <ScrollProgress />
     <Nav />
     <main className="w-full max-w-full overflow-x-hidden">
       <Outlet />

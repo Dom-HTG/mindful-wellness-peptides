@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Minus, Plus } from 'lucide-react'
+import { MaskHeading } from './MaskHeading'
 
 const ITEMS = [
   {
@@ -42,9 +43,9 @@ export const FAQ = () => {
       <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
         <div>
           <p className="eyebrow">Questions, answered</p>
-          <h2 className="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
+          <MaskHeading className="mt-5 text-balance font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] text-bone sm:text-5xl md:text-6xl">
             Everything you need before you order.
-          </h2>
+          </MaskHeading>
           <p className="mt-6 max-w-sm text-base leading-relaxed text-muted">
             Still unsure about a compound, a protocol supply or delivery to your state? Our team
             replies within a few hours.
@@ -74,7 +75,7 @@ export const FAQ = () => {
                   </span>
                 </button>
                 <div
-                  className={`grid overflow-hidden transition-all duration-500 ease-out ${
+                  className={`grid overflow-hidden transition-[grid-template-rows,opacity,padding-bottom] duration-500 ease-out-quart ${
                     isOpen ? 'grid-rows-[1fr] pb-7 opacity-100' : 'grid-rows-[0fr] opacity-0'
                   }`}
                 >

@@ -28,8 +28,9 @@ const Row = () => (
 )
 
 export const Marquee = () => (
-  <div className="relative border-y border-line bg-surface/60 py-6">
-    <div className="flex w-max animate-marquee">
+  <div className="group relative border-y border-line bg-surface/60 py-6">
+    <div className="hairline-t pointer-events-none absolute inset-x-0 top-0 h-px opacity-60" />
+    <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
       <Row />
       <Row />
     </div>

@@ -57,8 +57,8 @@ export const CartDrawer = () => {
           </div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
             <div
-              className="h-full rounded-full bg-gold transition-all duration-500"
-              style={{ width: `${progress}%` }}
+              className="h-full w-full origin-left rounded-full bg-gold transition-transform duration-500 ease-out-quart"
+              style={{ transform: `scaleX(${progress / 100})` }}
             />
           </div>
         </div>

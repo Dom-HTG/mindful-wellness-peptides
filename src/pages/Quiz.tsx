@@ -1,5 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import {
   Activity,
   ArrowLeft,
@@ -34,6 +36,9 @@ import { useCart } from '../context/CartContext'
 import { QUESTIONS } from '../data/quiz'
 import { formatNaira } from '../data/products'
 import { recommendPeptides, type QuizAnswers } from '../lib/quiz'
+import { EASE, prefersReducedMotion } from '../lib/motion'
+
+gsap.registerPlugin(useGSAP)
 
 const ICONS: Record<string, LucideIcon> = {
   Flame,
@@ -72,6 +77,21 @@ export const Quiz = () => {
   const [phase, setPhase] = useState<Phase>('intro')
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<QuizAnswers>({})
+  const stage = useRef<HTMLDivElement>(null)
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return
+      gsap.from('.quiz-anim', {
+        y: 26,
+        autoAlpha: 0,
+        duration: 0.6,
+        stagger: 0.06,
+        ease: EASE.out,
+      })
+    },
+    { scope: stage, dependencies: [phase, step], revertOnUpdate: true },
+  )
 
   const result = useMemo(() => recommendPeptides(answers), [answers])
   const question = QUESTIONS[step]
@@ -121,7 +141,7 @@ export const Quiz = () => {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div key={`${phase}-${step}`} className="animate-fade-up">
+        <div key={`${phase}-${step}`} ref={stage}>
         {phase === 'intro' && (
           <div className="mx-auto max-w-4xl text-center">
             <div className="quiz-anim mb-10 flex items-end justify-center gap-4">
@@ -192,8 +212,8 @@ export const Quiz = () => {
             </div>
             <div className="quiz-anim mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
               <div
-                className="h-full rounded-full bg-gold transition-all duration-500"
-                style={{ width: `${((step + 1) / QUESTIONS.length) * 100}%` }}
+                className="h-full w-full origin-left rounded-full bg-gold transition-transform duration-500 ease-out-quart"
+                style={{ transform: `scaleX(${(step + 1) / QUESTIONS.length})` }}
               />
             </div>
 
@@ -218,7 +238,7 @@ export const Quiz = () => {
                     key={option.id}
                     type="button"
                     onClick={() => (isMulti ? toggleMulti(option.id) : selectSingle(option.id))}
-                    className={`quiz-anim group flex h-full flex-col items-start gap-5 rounded-3xl border p-6 text-left transition-all duration-300 ${
+                    className={`quiz-anim group flex h-full flex-col items-start gap-5 rounded-3xl border p-6 text-left transition-[border-color,background-color] duration-300 ease-out-quart ${
                       selected
                         ? 'border-gold bg-gold/10'
                         : 'border-line bg-surface hover:border-gold/40 hover:bg-white/[0.03]'
